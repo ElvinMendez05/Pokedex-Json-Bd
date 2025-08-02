@@ -26,6 +26,7 @@ export function PostCreate (req, res, next) {
     res.redirect("/pokemones/index")
 };
 
+//Editar pokemones actualizado
 export function GetEdit (req, res, next) {
     const id = req.params.pokemonesId;
     PokemonModel.GetById(id, (pokemonList) => {
@@ -35,7 +36,7 @@ export function GetEdit (req, res, next) {
          res.render("pokemones/save", {
             editMode: true,
             pokemonList: pokemonList,
-            "page-title": `Edit Index Series ${pokemonList.name}`});
+            "page-title": `Editar Index pokemones ${pokemonList.nombre}`});
     }) 
 };
 
