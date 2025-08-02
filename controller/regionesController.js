@@ -1,5 +1,6 @@
 import RegionModel from "../model/regionesModel.js";
 
+//Obtener el index 
 export function GetIndex (req, res, next) {
     RegionModel.GetAll((regiones) => {
         res.render("regiones/index", {
@@ -9,8 +10,8 @@ export function GetIndex (req, res, next) {
     });
 };
 
-export function GetCreate (req, res, next) {
-    res.render("regiones/save", {editMode: false ,"page-title": "New Index Regiones list"});
+export function Getreate (req, res, next) {
+    res.render("regiones/save", {editMode: false ,"page-title": "New index regiones list"});
 };
 
 export function PostCreate (req, res, next) {
@@ -23,6 +24,7 @@ export function PostCreate (req, res, next) {
     res.redirect("/regiones/index");
 };
 
+// Get edit 
 export function GetEdit (req, res, next) {
     const id = req.params.regionesId;
     RegionModel.GetById(id, (regionList) => {
