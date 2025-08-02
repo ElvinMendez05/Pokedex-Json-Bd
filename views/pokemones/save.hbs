@@ -1,0 +1,88 @@
+<div class="container my-5">
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-4">
+      <h2 class="fw-bold mb-4 text-primary">
+        <i class="bi bi-plus-circle me-2"></i>
+        {{#if editMode}}Editar Pokémon: {{pokemonList.nombre}}{{else}}Crear nuevo Pokémon{{/if}}
+      </h2>
+
+      {{!-- <form action="/pokemones/{{#if editMode}}edit{{else}}create{{/if}}" method="POST"> --}}
+      <form action="/pokemones/{{#if editMode}}edit/{{pokemonList.id}}{{else}}create{{/if}}" method="POST">
+        <!-- Nombre -->
+        <div class="mb-3">
+          <label for="nombre" class="form-label fw-semibold">
+            <i class="bi bi-type me-1"></i>Nombre del Pokémon
+          </label>
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            id="nombre"
+            name="nombre"
+            placeholder="Ej: Pikachu"
+            required
+            value="{{#if editMode}}{{pokemonList.nombre}}{{/if}}"
+          >
+        </div>
+
+        <!-- Imagen -->
+        <div class="mb-3">
+          <label for="imagen" class="form-label fw-semibold">
+            <i class="bi bi-image me-1"></i>URL de la Imagen
+          </label>
+          <input
+            type="text"
+            class="form-control shadow-sm"
+            id="imagen"
+            name="imagen"
+            placeholder="https://..."
+            required
+            value="{{#if editMode}}{{pokemonList.imagen}}{{/if}}"
+          >
+        </div>
+
+        <!-- Región -->
+        <div class="mb-3">
+          <label for="region" class="form-label fw-semibold">
+            <i class="bi bi-globe-americas me-1 text-danger"></i>Región
+          </label>
+          <select id="region" name="region" class="form-select shadow-sm" required>
+            <option value="">-- Selecciona una región --</option>
+            <option value="Kanto" {{#if (eq pokemonList.region "Kanto")}}selected{{/if}}>Kanto</option>
+            <option value="Johto" {{#if (eq pokemonList.region "Johto")}}selected{{/if}}>Johto</option>
+            <option value="Hoenn" {{#if (eq pokemonList.region "Hoenn")}}selected{{/if}}>Hoenn</option>
+            <option value="Sinnoh" {{#if (eq pokemonList.region "Sinnoh")}}selected{{/if}}>Sinnoh</option>
+          </select>
+        </div>
+
+        <!-- Tipo Primario -->
+        <div class="mb-4">
+          <label for="tipoPrimario" class="form-label fw-semibold">
+            <i class="bi bi-lightning-fill me-1 text-warning"></i>Tipo Primario
+          </label>
+          <select id="tipoPrimario" name="tipoPrimario" class="form-select shadow-sm" required>
+            <option value="">-- Selecciona un tipo --</option>
+            <option value="Fuego" {{#if (eq pokemonList.tipoPrimario "Fuego")}}selected{{/if}}>Fuego</option>
+            <option value="Agua" {{#if (eq pokemonList.tipoPrimario "Agua")}}selected{{/if}}>Agua</option>
+            <option value="Planta" {{#if (eq pokemonList.tipoPrimario "Planta")}}selected{{/if}}>Planta</option>
+            <option value="Eléctrico" {{#if (eq pokemonList.tipoPrimario "Eléctrico")}}selected{{/if}}>Eléctrico</option>
+          </select>
+        </div>
+
+        {{#if editMode}}
+          <input type="hidden" name="pokemonesId" value="{{pokemonList.id}}" />
+        {{/if}}
+
+        <!-- Botones -->
+        <div class="d-flex justify-content-between">
+          <a href="/pokemones/index" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver
+          </a>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-check-circle"></i>
+            {{#if editMode}}Actualizar{{else}}Crear{{/if}}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
