@@ -1,0 +1,85 @@
+<div class="container my-4">
+  <form action="/" method="GET">
+    <div class="row g-3 align-items-end">
+      
+      <!-- Buscar por nombre -->
+      <div class="col-md-6">
+        <label for="nombre" class="form-label fw-semibold text-primary">Buscar por nombre</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          class="form-control"
+          placeholder="Ej: Pikachu"
+          value="{{nombreFiltro}}">
+      </div>
+
+      <!-- Filtrar por región (checkboxes) -->
+      <div class="col-md-4">
+        <label class="form-label fw-semibold text-primary">Filtrar por región</label>
+        <div class="border rounded p-2 bg-white" style="max-height: 150px; overflow-y: auto;">
+          {{#each regiones}}
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                name="regiones"
+                value="{{this.nombre}}"
+                id="region-{{@index}}"
+                {{#if (includes ../regionesSeleccionadas this.nombre)}}checked{{/if}}>
+              <label class="form-check-label" for="region-{{@index}}">
+                {{this.nombre}}
+              </label>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Botón buscar/filtrar -->
+      <div class="col-md-2 d-grid">
+        <button type="submit" class="btn btn-primary fw-semibold">
+          <i class="bi bi-funnel-fill me-1"></i> Filtrar
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+  <!-- Listado de Pokemones -->
+  {{#if hasPokemon}}
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {{#each pokemonList}}
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0">
+            <img
+              src="{{this.imagen}}"
+              class="card-img-top img-fluid"
+              alt="{{this.nombre}}"
+              style="height: 200px; object-fit: cover;"
+            >
+            <div class="card-body">
+              <h5 class="card-title fw-bold">{{this.nombre}}</h5>
+              <p class="card-text text-muted">
+                <i class="bi bi-lightning-fill text-warning me-1"></i><strong>Tipo:</strong> {{this.tipoPrimario}}
+              </p>
+              <p class="card-text text-muted">
+                <i class="bi bi-globe-americas text-danger me-1"></i><strong>Región:</strong> {{this.region}}
+              </p>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="alert alert-info text-center">
+      <i class="bi bi-info-circle me-1"></i> No hay pokemones registrados o no hay resultados con los filtros aplicados.
+    </div>
+  {{/if}}
+</div>
+
+{{#section "scripts"}}
+  <script>
+    
+  </script>
+{{/section}}
